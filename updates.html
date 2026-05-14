@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Updates - Group Bluetooth Audio</title>
+    <meta name="description" content="Version history and release notes for Group Bluetooth Audio">
+
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
+
+    <style>
+        :root {
+            --primary-blue: #007AFF;
+            --secondary-blue: #5AC8FA;
+            --dark-gray: #1D1D1F;
+            --light-gray: #F5F5F7;
+            --text-gray: #86868B;
+            --success-green: #30D158;
+            --warning-orange: #FF9500;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .logo span {
+            margin-left: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .download-btn {
+            background: var(--primary-blue);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: #0056CC;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+        }
+
+        /* Updates Section */
+        .updates {
+            padding: 80px 0;
+        }
+
+        .version-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .version-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .version-card.latest {
+            border: 2px solid var(--primary-blue);
+            background: linear-gradient(135deg, #f0f8ff 0%, #ffffff 100%);
+        }
+
+        .version-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .version-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .version-meta {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .build-badge {
+            background: var(--light-gray);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-gray);
+        }
+
+        .date-badge {
+            color: var(--text-gray);
+            font-size: 0.875rem;
+        }
+
+        .latest-badge {
+            background: var(--success-green);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .changes-section {
+            margin-bottom: 30px;
+        }
+
+        .changes-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .changes-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .changes-title.features {
+            color: var(--success-green);
+        }
+
+        .changes-title.improvements {
+            color: var(--primary-blue);
+        }
+
+        .changes-title.fixes {
+            color: var(--warning-orange);
+        }
+
+        .changes-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .changes-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.8;
+        }
+
+        .changes-list li:before {
+            content: "•";
+            position: absolute;
+            left: 10px;
+            font-size: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .features .changes-list li:before {
+            color: var(--success-green);
+        }
+
+        .improvements .changes-list li:before {
+            color: var(--primary-blue);
+        }
+
+        .fixes .changes-list li:before {
+            color: var(--warning-orange);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--secondary-blue);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .version-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .version-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                🎵 <span>Group Bluetooth Audio</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#screenshots">Screenshots</a></li>
+                <li><a href="index.html#setup">Setup</a></li>
+                <li><a href="updates.html">Updates</a></li>
+                <li><a href="index.html#support">Support</a></li>
+            </ul>
+            <a href="index.html#download" class="download-btn">Download Free</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>✨ What's New</h1>
+            <p class="subtitle">Version history and release notes</p>
+        </div>
+    </section>
+
+    <!-- Updates Section -->
+    <section class="updates">
+        <div class="container">
+
+            <!-- Version 1.2.0 -->
+            <div class="version-card latest">
+                <div class="version-header">
+                    <h2 class="version-number">Version 1.2.0</h2>
+                    <div class="version-meta">
+                        <span class="latest-badge">Latest</span>
+                        <span class="build-badge">Build 8</span>
+                        <span class="date-badge">📅 October 21, 2025</span>
+                    </div>
+                </div>
+
+                <div class="changes-section features">
+                    <h3 class="changes-title">✨ New Features</h3>
+                    <ul class="changes-list">
+                        <li>📊 Real-time multi-device status indicators in app and menu bar</li>
+                        <li>⚠️ Visual warnings when multi-output exists but isn't selected</li>
+                        <li>❓ Interactive help popover with step-by-step setup instructions</li>
+                        <li>🖱️ Clickable status badge to open Audio MIDI Setup automatically</li>
+                    </ul>
+                </div>
+
+                <div class="changes-section improvements">
+                    <h3 class="changes-title">🚀 Improvements</h3>
+                    <ul class="changes-list">
+                        <li>⚡ Major performance optimization with production-ready logging</li>
+                        <li>💾 SwiftData save debouncing (80-90% reduction in disk I/O)</li>
+                        <li>🎚️ Menu bar sliders now update in real-time while menu is open</li>
+                        <li>📝 Eliminated 296 print() statements in production builds</li>
+                        <li>🔄 Smarter save operations - batch changes instead of per-keystroke writes</li>
+                    </ul>
+                </div>
+
+                <div class="changes-section fixes">
+                    <h3 class="changes-title">🐛 Bug Fixes</h3>
+                    <ul class="changes-list">
+                        <li>Fixed F2/F3 brightness keys incorrectly triggering volume changes</li>
+                        <li>Fixed menu bar volume sliders not responding to keyboard volume keys</li>
+                        <li>Fixed menu bar requiring close/reopen to see current volume levels</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Version 1.1.1 -->
+            <div class="version-card">
+                <div class="version-header">
+                    <h2 class="version-number">Version 1.1.1</h2>
+                    <div class="version-meta">
+                        <span class="build-badge">Build 7</span>
+                        <span class="date-badge">📅 October 17, 2024</span>
+                    </div>
+                </div>
+
+                <div class="changes-section improvements">
+                    <h3 class="changes-title">🚀 Improvements</h3>
+                    <ul class="changes-list">
+                        <li>Window lifecycle management for better stability</li>
+                        <li>Background Mode setting now properly notifies when restart is required</li>
+                    </ul>
+                </div>
+
+                <div class="changes-section fixes">
+                    <h3 class="changes-title">🐛 Bug Fixes</h3>
+                    <ul class="changes-list">
+                        <li>Fixed crash when closing app window opened from menu bar</li>
+                        <li>Fixed Background Mode toggle immediately closing Settings window</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Version 1.1 -->
+            <div class="version-card">
+                <div class="version-header">
+                    <h2 class="version-number">Version 1.1</h2>
+                    <div class="version-meta">
+                        <span class="build-badge">Build 2</span>
+                        <span class="date-badge">📅 October 16, 2024</span>
+                    </div>
+                </div>
+
+                <div class="changes-section features">
+                    <h3 class="changes-title">✨ New Features</h3>
+                    <ul class="changes-list">
+                        <li>🎯 Background Mode (Pro) - Hide from dock, run as menu bar-only app</li>
+                        <li>🐛 Bug Report System - One-click bug reporting with log viewer</li>
+                        <li>📊 Debug Logger - Comprehensive logging with filtering and search</li>
+                        <li>🎚️ Fixed volume control - Individual devices now adjust correctly when master is at 100%</li>
+                    </ul>
+                </div>
+
+                <div class="changes-section improvements">
+                    <h3 class="changes-title">🚀 Improvements</h3>
+                    <ul class="changes-list">
+                        <li>Volume state persistence - Device volumes no longer reset unexpectedly</li>
+                        <li>Better volume tracking - Devices remember their settings across restarts</li>
+                        <li>Cleaner codebase - Fixed all Xcode warnings</li>
+                        <li>Menu bar polish - Added "What's New" and "Bug Report" options</li>
+                    </ul>
+                </div>
+
+                <div class="changes-section fixes">
+                    <h3 class="changes-title">🐛 Bug Fixes</h3>
+                    <ul class="changes-list">
+                        <li>Fixed volume jumping to 50% after period of inactivity</li>
+                        <li>Fixed keyboard volume keys not working when master at 100%</li>
+                        <li>Fixed volume state desynchronization between UI and hardware</li>
+                        <li>Fixed weak reference warnings in menu bar controller</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Version 1.0 -->
+            <div class="version-card">
+                <div class="version-header">
+                    <h2 class="version-number">Version 1.0</h2>
+                    <div class="version-meta">
+                        <span class="build-badge">Build 1</span>
+                        <span class="date-badge">📅 October 2, 2024</span>
+                    </div>
+                </div>
+
+                <div class="changes-section features">
+                    <h3 class="changes-title">✨ Initial Release</h3>
+                    <ul class="changes-list">
+                        <li>🎵 Multi-device Bluetooth audio support</li>
+                        <li>🔊 Individual volume control per device</li>
+                        <li>⌨️ Keyboard shortcut support (volume keys, media keys)</li>
+                        <li>💾 Device state persistence with SwiftData</li>
+                        <li>🎛️ Master volume control for all devices</li>
+                        <li>📱 Menu bar controls (Pro)</li>
+                        <li>⚙️ Custom volume steps and debouncing (Pro)</li>
+                        <li>🎹 Custom key mappings (Pro)</li>
+                    </ul>
+                </div>
+
+                <div class="changes-section improvements">
+                    <h3 class="changes-title">🚀 Core Features</h3>
+                    <ul class="changes-list">
+                        <li>Multi-output device creation and management</li>
+                        <li>Bluetooth device auto-detection</li>
+                        <li>Drift correction for sync</li>
+                        <li>Device reconnection on startup</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Group Bluetooth Audio. All rights reserved.</p>
+            <p>
+                <a href="privacy-policy.html">Privacy Policy</a> |
+                <a href="terms-of-use.html">Terms of Use</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

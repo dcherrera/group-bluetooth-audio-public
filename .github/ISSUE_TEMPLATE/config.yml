@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 General Discussion & Questions
+    url: https://github.com/dcherrera/group-bluetooth-audio-website/discussions
+    about: Ask questions, share tips, or discuss the app with the community
+  - name: 📧 Direct Support
+    url: mailto:theherrerahomestead@gmail.com
+    about: Email support for purchase issues, account problems, or private matters
+  - name: 📖 Setup Guide
+    url: https://github.com/dcherrera/group-bluetooth-audio-website/blob/main/SETUP.md
+    about: Detailed setup instructions and troubleshooting guide
+  - name: 🍎 Mac App Store
+    url: https://apps.apple.com/app/group-bluetooth-audio/idYOUR_APP_ID
+    about: Download Group Bluetooth Audio or leave a review
